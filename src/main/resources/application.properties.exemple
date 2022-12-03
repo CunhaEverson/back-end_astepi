@@ -1,0 +1,37 @@
+/*
+#DATASOURCE
+spring.jpa.database=POSTGRESQL
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.datasource.url=jdbc:postgresql://localhost:5432/"nome do banco"
+spring.datasource.username="nome_usuario"
+spring.datasource.password=suasenha
+spring.datasource.driverClassName=org.postgresql.Driver
+
+# JPA
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=create-drop
+
+# Swagger
+springdoc.packagesToScan=demo.restservices
+springdoc.pathsToMatch=/**
+
+#http://localhost:8080/swagger-ui/index.html
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
