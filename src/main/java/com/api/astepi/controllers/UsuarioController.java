@@ -62,10 +62,21 @@ public class UsuarioController {
         if (!usuarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario not found.");
         }
-        var usuarioModel = new UsuarioModel();
-        BeanUtils.copyProperties(usuarioDto, usuarioModel);
-        usuarioModel.setId(usuarioModelOptional.get().getId());
-        usuarioModel.setRegistrationDate(usuarioModelOptional.get().getRegistrationDate());
+        var usuarioModel = usuarioModelOptional.get();
+        usuarioModel.setNome(usuarioDto.getNome());
+        usuarioModel.setCpf(usuarioDto.getCpf());
+        usuarioModel.setCelular(usuarioDto.getCelular());
+        usuarioModel.setEmail(usuarioDto.getEmail());
+        usuarioModel.setMatricula(usuarioDto.getMatricula());
+        usuarioModel.setCargo(usuarioDto.getCargo());
+        usuarioModel.setStatus(usuarioDto.isStatus());
+        usuarioModel.setNomeLogin(usuarioDto.getNomeLogin());
+        usuarioModel.setSenha(usuarioDto.getSenha());
+        usuarioModel.setDataNascimento(usuarioDto.getDataNascimento());
+        usuarioModel.setProfissao(usuarioDto.getProfissao());
+        usuarioModel.setEstadoCivil(usuarioDto.isEstadoCivil());
+        usuarioModel.setNacionalidade(usuarioDto.getNacionalidade());
+        usuarioModel.setNaturalidade(usuarioDto.getNaturalidade());
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.save(usuarioModel));
     }
 }

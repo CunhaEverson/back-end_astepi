@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class AdministradorDto {
+public class AdministradorDto extends PessoaDto {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String sistema;
@@ -18,4 +18,5 @@ public class AdministradorDto {
     public void setSistema(String sistema) {
         this.sistema = sistema;
     }
+
 }

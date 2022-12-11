@@ -111,15 +111,6 @@ public class AgendamentoModel implements Serializable {
         this.sala = sala;
     }
 
-   /* public UsuarioModel getUsuarioModel() {
-        return usuarioModel;
-    }
-    public void setUsuarioModel(UsuarioModel usuarioModel) {
-        this.usuarioModel = usuarioModel;
-    }
-    public SecretariaModel getSecretariaModel() {
-        return secretariaModel;
-    }*/
 
     public Set<SecretariaModel> getEndereco() {
         return endereco;
@@ -144,4 +135,5 @@ public class AgendamentoModel implements Serializable {
     public void setDocumento(List<DocumentoModel> documento) {
         this.documento = documento;
     }
+
 }

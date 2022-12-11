@@ -3,6 +3,7 @@ package com.api.astepi.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class AdministradorModel extends PessoaModel implements Serializable {
     private static final long serialVersionUID = 1L;
+
 
     @Column(length = 50)
     private String sistema;

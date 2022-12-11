@@ -9,22 +9,25 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.util.Date;
 
-public class UsuarioDto {
+public class UsuarioDto extends PessoaDto {
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date dataNascimento;
+
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String profissao;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private String estadoCivil;
+    private boolean estadoCivil;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String nacionalidade;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String naturalidade;
+
+
 
     public Date getDataNascimento() {
         return dataNascimento;
@@ -42,11 +45,11 @@ public class UsuarioDto {
         this.profissao = profissao;
     }
 
-    public String getEstadoCivil() {
+    public boolean isEstadoCivil() {
         return estadoCivil;
     }
 
-    public void setEstadoCivil(String estadoCivil) {
+    public void setEstadoCivil(boolean estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 
@@ -65,4 +68,6 @@ public class UsuarioDto {
     public void setNaturalidade(String naturalidade) {
         this.naturalidade = naturalidade;
     }
+
+
 }

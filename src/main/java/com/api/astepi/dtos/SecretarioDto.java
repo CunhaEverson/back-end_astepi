@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-public class SecretarioDto {
+public class SecretarioDto extends PessoaDto {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String atribuicao;

@@ -1,24 +1,21 @@
 package com.api.astepi.models;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.DiscriminatorOptions;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import static javax.persistence.DiscriminatorType.STRING;
-import static javax.persistence.InheritanceType.SINGLE_TABLE;
-
-
 @Entity
-public class UsuarioModel extends PessoaModel  {
-    private static final long serialVersionUID = 1L;
+@DiscriminatorValue(value="USUARIOMODEL")
+public class UsuarioModel extends PessoaModel implements Serializable {
+    private static final long serialVersionUID = 11;
+
 
     @Column(length = 10)
     @JsonFormat(pattern="dd-MM-yyyy")
@@ -27,14 +24,15 @@ public class UsuarioModel extends PessoaModel  {
     @Column(length = 50)
     private String profissao;
 
-    @Column(length = 30)
-    private String estadoCivil;
+    @Column(length =25)
+    private boolean estadoCivil;
 
-    @Column(length = 30)
+    @Column(length = 25)
     private String nacionalidade;
 
-    @Column(length = 30)
+    @Column(length = 25)
     private String naturalidade;
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioEndereco")
     private List<EnderecoModel> endereco;
@@ -45,15 +43,25 @@ public class UsuarioModel extends PessoaModel  {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "usuarioFormulario")
     private FormularioModel formulario;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioSecretario")
-    private List<SecretarioModel> secretario;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioAdvogadoVoluntario")
-    private List<AdvogadoVoluntarioModel> advogadoVoluntario;
-
     @ManyToOne
     @JoinColumn(name = "administrador_usuario_id")
     private AdministradorModel administradorUsuario;
+/*
+    public UsuarioModel() {
+    }
+
+    public UsuarioModel(UUID id, String nome, String cpf, int celular, String email, int matricula, String cargo, boolean status, String nomeLogin, String senha, LocalDateTime registrationDate, List<AgendamentoModel> agendamento){
+        super(id, nome, cpf, celular, email, matricula, cargo, status, nomeLogin, senha, registrationDate);
+    }
+*/
+    public AdministradorModel getAdministradorUsuario() {
+        return administradorUsuario;
+    }
+
+    public void setAdministradorUsuario(AdministradorModel administradorUsuario) {
+        this.administradorUsuario = administradorUsuario;
+    }
+
 
     public Date getDataNascimento() {
         return dataNascimento;
@@ -71,11 +79,11 @@ public class UsuarioModel extends PessoaModel  {
         this.profissao = profissao;
     }
 
-    public String getEstadoCivil() {
+    public boolean isEstadoCivil() {
         return estadoCivil;
     }
 
-    public void setEstadoCivil(String estadoCivil) {
+    public void setEstadoCivil(boolean estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 
@@ -117,29 +125,5 @@ public class UsuarioModel extends PessoaModel  {
 
     public void setFormulario(FormularioModel formulario) {
         this.formulario = formulario;
-    }
-
-    public List<SecretarioModel> getSecretario() {
-        return secretario;
-    }
-
-    public void setSecretario(List<SecretarioModel> secretario) {
-        this.secretario = secretario;
-    }
-
-    public List<AdvogadoVoluntarioModel> getAdvogadoVoluntario() {
-        return advogadoVoluntario;
-    }
-
-    public void setAdvogadoVoluntario(List<AdvogadoVoluntarioModel> advogadoVoluntario) {
-        this.advogadoVoluntario = advogadoVoluntario;
-    }
-
-    public AdministradorModel getAdministradorUsuario() {
-        return administradorUsuario;
-    }
-
-    public void setAdministradorUsuario(AdministradorModel administradorUsuario) {
-        this.administradorUsuario = administradorUsuario;
     }
 }
