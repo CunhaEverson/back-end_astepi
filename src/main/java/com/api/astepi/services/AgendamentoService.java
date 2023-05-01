@@ -1,12 +1,12 @@
 package com.api.astepi.services;
 
+
 import com.api.astepi.models.AgendamentoModel;
 import com.api.astepi.repositories.AgendamentoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public class AgendamentoService {
         return agendamentoRepository.findAll(pageable);
     }
 
-    public Optional<AgendamentoModel> finByID(UUID id) {
+    public Optional<AgendamentoModel> findById(UUID id) {
         return agendamentoRepository.findById(id);
     }
 
@@ -35,5 +35,7 @@ public class AgendamentoService {
     public void delete(AgendamentoModel agendamentoModel) {
         agendamentoRepository.delete(agendamentoModel);
     }
+
+
 
 }

@@ -13,7 +13,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, UUID> {
 
 
 
-     List<UsuarioModel> findByNome(@Param("name") String name);
+    List<UsuarioModel> findByNome(@Param("name") String name);
 
 
     @Query("SELECT c.nome FROM UsuarioModel c where c.id = :id")
@@ -27,6 +27,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, UUID> {
      * @param name
      * @return lista de clientes
      */
-   List<UsuarioModel> findByNomeOrderByNome(@Param("name") String name);
+    List<UsuarioModel> findByNomeOrderByNome(@Param("name") String name);
 
+    boolean existsByEmail(String email);
 }

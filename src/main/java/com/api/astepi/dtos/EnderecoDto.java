@@ -1,26 +1,25 @@
 package com.api.astepi.dtos;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 public class EnderecoDto {
 
+    @JsonIgnoreProperties(ignoreUnknown = true) //Atualizado
+    private UUID usuarioId;
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String rua;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private int numero;
+    private String numero;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String cep;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String complemento;
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private int celular;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String bairro;
@@ -31,6 +30,14 @@ public class EnderecoDto {
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String estado;
 
+    public UUID getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(UUID usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     public String getRua() {
         return rua;
     }
@@ -39,11 +46,11 @@ public class EnderecoDto {
         this.rua = rua;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -63,13 +70,6 @@ public class EnderecoDto {
         this.complemento = complemento;
     }
 
-    public int getCelular() {
-        return celular;
-    }
-
-    public void setCelular(int celular) {
-        this.celular = celular;
-    }
 
     public String getBairro() {
         return bairro;
@@ -94,5 +94,6 @@ public class EnderecoDto {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
 
 }

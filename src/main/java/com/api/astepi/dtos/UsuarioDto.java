@@ -1,15 +1,15 @@
 package com.api.astepi.dtos;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.lang.Nullable;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.Date;
 
+
 public class UsuarioDto extends PessoaDto {
+
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date dataNascimento;
@@ -68,6 +68,5 @@ public class UsuarioDto extends PessoaDto {
     public void setNaturalidade(String naturalidade) {
         this.naturalidade = naturalidade;
     }
-
 
 }

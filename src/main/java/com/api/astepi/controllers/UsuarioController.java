@@ -1,10 +1,13 @@
 package com.api.astepi.controllers;
 
 
+import com.api.astepi.dtos.AgendamentoDto;
+import com.api.astepi.dtos.EnderecoDto;
 import com.api.astepi.dtos.UsuarioDto;
 import com.api.astepi.models.UsuarioModel;
 import com.api.astepi.services.UsuarioService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,11 +26,28 @@ import java.util.UUID;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/usuarios")
 public class UsuarioController {
-    final UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
+    @Autowired
     public UsuarioController(UsuarioService usuarioService) {
+
         this.usuarioService = usuarioService;
     }
+
+    //Atualizado AGENDAMENTO
+    @PostMapping("/{usuarioId}/agendamentos")
+    public ResponseEntity<Object> addAgendamento(@PathVariable UUID usuarioId, @RequestBody @Valid AgendamentoDto agendamentoDto) {
+        usuarioService.addAgendamento(usuarioId, agendamentoDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    //Atualizado ENDEREÇO
+    @PostMapping("/{usuarioId}/enderecos")
+    public ResponseEntity<Object> addEndereco(@PathVariable UUID usuarioId, @RequestBody @Valid EnderecoDto enderecoDto) {
+        usuarioService.addEndereco(usuarioId, enderecoDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    //Bloco de código de Usuario
     @PostMapping
     public ResponseEntity<Object> saveUsuario(@RequestBody @Valid UsuarioDto usuarioDto){
         var usuarioModel = new UsuarioModel();
@@ -41,15 +61,16 @@ public class UsuarioController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneUsuario(@PathVariable (value = "id") UUID id){
-        Optional<UsuarioModel> usuarioModelOptional = usuarioService.finByID(id);
+        Optional<UsuarioModel> usuarioModelOptional = usuarioService.findById(id);
         if(!usuarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(usuarioModelOptional.get());
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUsuario(@PathVariable (value = "id")UUID id){
-        Optional<UsuarioModel> usuarioModelOptional = usuarioService.finByID(id);
+        Optional<UsuarioModel> usuarioModelOptional = usuarioService.findById(id);
         if(!usuarioModelOptional .isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario not found.");
         }
@@ -58,12 +79,15 @@ public class UsuarioController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUsuario(@PathVariable(value = "id")UUID id,@RequestBody @Valid UsuarioDto usuarioDto){
-        Optional<UsuarioModel> usuarioModelOptional = usuarioService.finByID(id);
+        Optional<UsuarioModel> usuarioModelOptional = usuarioService.findById(id);
         if (!usuarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario not found.");
         }
         var usuarioModel = usuarioModelOptional.get();
-        usuarioModel.setNome(usuarioDto.getNome());
+        BeanUtils.copyProperties(usuarioDto, usuarioModel);
+        usuarioModel.setId(usuarioModelOptional.get().getId());
+        usuarioModel.setRegistrationDate(usuarioModelOptional.get().getRegistrationDate());
+        /*usuarioModel.setNome(usuarioDto.getNome());
         usuarioModel.setCpf(usuarioDto.getCpf());
         usuarioModel.setCelular(usuarioDto.getCelular());
         usuarioModel.setEmail(usuarioDto.getEmail());
@@ -76,7 +100,7 @@ public class UsuarioController {
         usuarioModel.setProfissao(usuarioDto.getProfissao());
         usuarioModel.setEstadoCivil(usuarioDto.isEstadoCivil());
         usuarioModel.setNacionalidade(usuarioDto.getNacionalidade());
-        usuarioModel.setNaturalidade(usuarioDto.getNaturalidade());
+        usuarioModel.setNaturalidade(usuarioDto.getNaturalidade());*/
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.save(usuarioModel));
     }
 }

@@ -1,18 +1,21 @@
 package com.api.astepi.dtos;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.UUID;
+
 
 public class AgendamentoDto {
 
+    @JsonIgnoreProperties(ignoreUnknown = true) //Atualizado
+    private UUID usuarioId;
     @JsonIgnoreProperties(ignoreUnknown = true)
     private int dia;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private int mes;
+    private String mes;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private int ano;
@@ -22,10 +25,17 @@ public class AgendamentoDto {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String sala;
-/*
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    UsuarioDto usuarioDto;
 
+
+    public UUID getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(UUID usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    /*
     @JsonIgnoreProperties(ignoreUnknown = true)
     SecretariaDto secretariaDto;
 
@@ -43,11 +53,11 @@ public class AgendamentoDto {
         this.dia = dia;
     }
 
-    public int getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(int mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
 
@@ -74,36 +84,7 @@ public class AgendamentoDto {
     public void setSala(String sala) {
         this.sala = sala;
     }
-/*
-    public UsuarioDto getUsuarioDto() {
-        return usuarioDto;
-    }
 
-    public void setUsuarioDto(UsuarioDto usuarioDto) {
-        this.usuarioDto = usuarioDto;
-    }
 
-    public SecretariaDto getSecretariaDto() {
-        return secretariaDto;
-    }
 
-    public void setSecretariaDto(SecretariaDto secretariaDto) {
-        this.secretariaDto = secretariaDto;
-    }
-
-    public EnderecoDto getEnderecoDto() {
-        return enderecoDto;
-    }
-
-    public void setEnderecoDto(EnderecoDto enderecoDto) {
-        this.enderecoDto = enderecoDto;
-    }
-
-    public DocumentoDto getDocumentoDto() {
-        return documentoDto;
-    }
-
-    public void setDocumentoDto(DocumentoDto documentoDto) {
-        this.documentoDto = documentoDto;
-    }*/
 }

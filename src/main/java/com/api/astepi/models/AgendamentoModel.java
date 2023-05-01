@@ -1,12 +1,12 @@
 package com.api.astepi.models;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "TB_AGENDAMENTO")
@@ -21,7 +21,7 @@ public class AgendamentoModel implements Serializable {
     private int dia;
 
     @Column(length = 2)
-    private int mes;
+    private String mes;
 
     @Column(length = 4)
     private int ano;
@@ -46,19 +46,17 @@ public class AgendamentoModel implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "agendamentoDocumento")
     private List<DocumentoModel> documento;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_agendamento_id")
-    private UsuarioModel usuarioAgendamento;
 
-    public UsuarioModel getUsuarioAgendamento() {
-        return usuarioAgendamento;
-    }
 
-    public void setUsuarioAgendamento(UsuarioModel usuarioAgendamento) {
-        this.usuarioAgendamento = usuarioAgendamento;
-    }
+    @JsonIgnore                                 //Atualizado
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private UsuarioModel usuario;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
+
+
+
+/*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuarioModel_id")
     private UsuarioModel usuarioModel;*/
 
@@ -79,11 +77,11 @@ public class AgendamentoModel implements Serializable {
         this.dia = dia;
     }
 
-    public int getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(int mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
 
@@ -136,4 +134,12 @@ public class AgendamentoModel implements Serializable {
         this.documento = documento;
     }
 
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
 }
+

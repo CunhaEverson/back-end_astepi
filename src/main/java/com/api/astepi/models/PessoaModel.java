@@ -13,7 +13,6 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
 @Entity
 @Table(name = "TB_PESSOA")
-
 public class PessoaModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,31 +20,31 @@ public class PessoaModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(length = 255)
+    @Column(length = 254)
     private String nome;
 
     @Column(unique = true, length = 14)
     private String cpf;
 
-    @Column(length = 11)
-    private int celular;
+    @Column(length = 15)
+    private String celular;
 
     @Column(length = 50)
     private String email;
 
     @Column(length = 10)
-    private int matricula;
+    private String matricula;
 
     @Column(length = 50)
     private String cargo;
 
-    @Column(length = 10)
-    private boolean status;
+    @Column(length = 254)
+    private String status;
 
     @Column(length = 25)
     private String nomeLogin;
 
-    @Column(length = 9)
+    @Column(length = 15)
     private String senha;
 
     @Column
@@ -76,12 +75,16 @@ public class PessoaModel implements Serializable {
         this.cpf = cpf;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getEmail() {
@@ -92,12 +95,8 @@ public class PessoaModel implements Serializable {
         this.email = email;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
-    }
-
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
     }
 
     public String getCargo() {
@@ -108,11 +107,11 @@ public class PessoaModel implements Serializable {
         this.cargo = cargo;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

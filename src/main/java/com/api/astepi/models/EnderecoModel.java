@@ -1,10 +1,10 @@
 package com.api.astepi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.JoinColumn;
@@ -19,36 +19,50 @@ public class EnderecoModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(length = 255)
+    @Column(length = 254)
     private String rua;
 
     @Column(length = 15)
-    private int numero;
+    private String numero;
 
-    @Column(length = 15)
-    private String cep;
-
-    @Column(length = 255)
+    @Column(length = 254)
     private String complemento;
 
-    @Column(length = 15)
-    private int telefoneFixo;
-
-    @Column(length = 15)
-    private int celular;
-
-    @Column(length = 255)
+    @Column(length = 254)
     private String bairro;
 
-    @Column(length = 255)
+    @Column(length = 254)
     private String cidade;
 
     @Column(length = 100)
     private String estado;
 
-    @ManyToOne
+    @Column(length = 15)
+    private String cep;
+
+    public EnderecoModel(){  //Atualizado
+
+    }
+
+    //Atualizado
+    public EnderecoModel(String rua, String numero, String cep, String complemento, String bairro, String cidade, String estado) {
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+    }
+
+    /*@ManyToOne
     @JoinColumn(name = "usuario_endereco_id")
-    private UsuarioModel usuarioEndereco;
+    private UsuarioModel usuarioEndereco;*/
+
+    @JsonIgnore                                 //Atualizado
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private UsuarioModel usuario;
 
     @ManyToMany(mappedBy = "enderecos", cascade = { CascadeType.ALL })
     private Set<AgendamentoModel> agendamentos= new HashSet<AgendamentoModel>();
@@ -72,13 +86,6 @@ public class EnderecoModel implements Serializable {
         this.rua = rua;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
 
     public String getCep() {
         return cep;
@@ -96,20 +103,12 @@ public class EnderecoModel implements Serializable {
         this.complemento = complemento;
     }
 
-    public int getTelefoneFixo() {
-        return telefoneFixo;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setTelefoneFixo(int telefoneFixo) {
-        this.telefoneFixo = telefoneFixo;
-    }
-
-    public int getCelular() {
-        return celular;
-    }
-
-    public void setCelular(int celular) {
-        this.celular = celular;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getBairro() {
@@ -136,12 +135,12 @@ public class EnderecoModel implements Serializable {
         this.estado = estado;
     }
 
-    public UsuarioModel getUsuarioEndereco() {
-        return usuarioEndereco;
+    public UsuarioModel getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioEndereco(UsuarioModel usuarioEndereco) {
-        this.usuarioEndereco = usuarioEndereco;
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
 
     public Set<AgendamentoModel> getAgendamentos() {
@@ -160,13 +159,13 @@ public class EnderecoModel implements Serializable {
         this.advogadosvoluntarios = advogadosvoluntarios;
     }
 
-    public boolean comprovanteResid() {
+   /* public boolean comprovanteResid() {
         String entregue = "N";
         if (entregue == "S") {
             return true;
         } else {
             return false;
         }
-    }
+    }*/
 
 }

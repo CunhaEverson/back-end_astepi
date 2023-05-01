@@ -1,12 +1,11 @@
 package com.api.astepi.dtos;
 
 
+import com.api.astepi.models.AgendamentoModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PessoaDto {
     @JsonIgnoreProperties(ignoreUnknown = true) //validações para verificar se não estar vindo null ou número vázio.
@@ -16,25 +15,26 @@ public class PessoaDto {
     private String cpf;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private int celular;
+    private String celular;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String email;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private int matricula;
+    private String matricula;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String cargo;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private boolean status;
+    private String status;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String nomeLogin;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String senha;
+
 
     public String getNome() {
         return nome;
@@ -52,11 +52,11 @@ public class PessoaDto {
         this.cpf = cpf;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
@@ -68,11 +68,7 @@ public class PessoaDto {
         this.email = email;
     }
 
-    public int getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
@@ -84,11 +80,11 @@ public class PessoaDto {
         this.cargo = cargo;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -107,4 +103,6 @@ public class PessoaDto {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+
 }

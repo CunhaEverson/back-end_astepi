@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
@@ -34,11 +32,40 @@ public class UsuarioModel extends PessoaModel implements Serializable {
     private String naturalidade;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioEndereco")
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioEndereco")
     private List<EnderecoModel> endereco;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioAgendamento")
-    private List<AgendamentoModel> agendamento;
+    private List<AgendamentoModel> agendamento;*/
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true) //atualizado
+    private List<AgendamentoModel> agendamentos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true) //atualizado
+    private List<EnderecoModel> enderecos = new ArrayList<>();
+
+    // Podemos criar outros métodos de acordo com a lógica de negócio do projeto
+    public void addAgendamento(AgendamentoModel agendamento) {
+        agendamentos.add(agendamento);
+        agendamento.setUsuario(this);
+    }
+
+    public void removeAgendamento(AgendamentoModel agendamento) {
+        agendamentos.remove(agendamento);
+        agendamento.setUsuario(null);
+    }
+
+    public void addEndereco(EnderecoModel endereco) {
+        enderecos.add(endereco);
+        endereco.setUsuario(this);
+    }
+
+    public void removeEndereco(EnderecoModel endereco) {
+        enderecos.remove(endereco);
+        endereco.setUsuario(null);
+    }
+
+
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "usuarioFormulario")
     private FormularioModel formulario;
@@ -46,14 +73,16 @@ public class UsuarioModel extends PessoaModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "administrador_usuario_id")
     private AdministradorModel administradorUsuario;
-/*
-    public UsuarioModel() {
-    }
 
-    public UsuarioModel(UUID id, String nome, String cpf, int celular, String email, int matricula, String cargo, boolean status, String nomeLogin, String senha, LocalDateTime registrationDate, List<AgendamentoModel> agendamento){
-        super(id, nome, cpf, celular, email, matricula, cargo, status, nomeLogin, senha, registrationDate);
-    }
-*/
+
+    /*
+        public UsuarioModel() {
+        }
+
+        public UsuarioModel(UUID id, String nome, String cpf, int celular, String email, int matricula, String cargo, boolean status, String nomeLogin, String senha, LocalDateTime registrationDate, List<AgendamentoModel> agendamento){
+            super(id, nome, cpf, celular, email, matricula, cargo, status, nomeLogin, senha, registrationDate);
+        }
+    */
     public AdministradorModel getAdministradorUsuario() {
         return administradorUsuario;
     }
@@ -103,21 +132,6 @@ public class UsuarioModel extends PessoaModel implements Serializable {
         this.naturalidade = naturalidade;
     }
 
-    public List<EnderecoModel> getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(List<EnderecoModel> endereco) {
-        this.endereco = endereco;
-    }
-
-    public List<AgendamentoModel> getAgendamento() {
-        return agendamento;
-    }
-
-    public void setAgendamento(List<AgendamentoModel> agendamento) {
-        this.agendamento = agendamento;
-    }
 
     public FormularioModel getFormulario() {
         return formulario;
@@ -125,5 +139,21 @@ public class UsuarioModel extends PessoaModel implements Serializable {
 
     public void setFormulario(FormularioModel formulario) {
         this.formulario = formulario;
+    }
+
+    public List<AgendamentoModel> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<AgendamentoModel> agendamentos) {
+        this.agendamentos = agendamentos;
+    }
+
+    public List<EnderecoModel> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<EnderecoModel> enderecos) {
+        this.enderecos = enderecos;
     }
 }
