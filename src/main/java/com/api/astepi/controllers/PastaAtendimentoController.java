@@ -44,7 +44,7 @@ public class PastaAtendimentoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOnePastaAtendimento(@PathVariable (value = "id") UUID id){
-        Optional<PastaAtendimentoModel> pastaAtendimentoModelOptional = pastaAtendimentoService.finByID(id);
+        Optional<PastaAtendimentoModel> pastaAtendimentoModelOptional = pastaAtendimentoService.finById(id);
         if(!pastaAtendimentoModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("PastaAtendimento not found.");
         }
@@ -53,7 +53,7 @@ public class PastaAtendimentoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletePastaAtendimento(@PathVariable (value = "id")UUID id){
-        Optional<PastaAtendimentoModel> pastaAtendimentoModelOptional = pastaAtendimentoService.finByID(id);
+        Optional<PastaAtendimentoModel> pastaAtendimentoModelOptional = pastaAtendimentoService.finById(id);
         if(!pastaAtendimentoModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("PastaAtendimento not found.");
         }
@@ -63,7 +63,7 @@ public class PastaAtendimentoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePastaAtendimento(@PathVariable(value = "id")UUID id,@RequestBody @Valid PastaAtendimentoDto pastaAtendimentoDto){
-        Optional<PastaAtendimentoModel> pastaAtendimentoModelOptional = pastaAtendimentoService.finByID(id);
+        Optional<PastaAtendimentoModel> pastaAtendimentoModelOptional = pastaAtendimentoService.finById(id);
         if (!pastaAtendimentoModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("PastaAtendimento not found.");
         }

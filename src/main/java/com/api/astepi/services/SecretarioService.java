@@ -26,7 +26,7 @@ public class SecretarioService {
 
     public Page<SecretarioModel> findAll(Pageable pageable){ return secretarioRepository.findAll(pageable); }
 
-    public Optional<SecretarioModel> finByID(UUID id) {
+    public Optional<SecretarioModel> finById(UUID id) {
         return secretarioRepository.findById(id);
     }
     @Transactional

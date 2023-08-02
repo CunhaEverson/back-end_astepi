@@ -41,7 +41,7 @@ public class FormularioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneFormulario(@PathVariable (value = "id") UUID id){
-        Optional<FormularioModel> formularioModelOptional = formularioService.finByID(id);
+        Optional<FormularioModel> formularioModelOptional = formularioService.finById(id);
         if(!formularioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Formulario not found.");
         }
@@ -50,7 +50,7 @@ public class FormularioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteFormulario(@PathVariable (value = "id")UUID id){
-        Optional<FormularioModel> formularioModelOptional = formularioService.finByID(id);
+        Optional<FormularioModel> formularioModelOptional = formularioService.finById(id);
         if(!formularioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Formulario not found.");
         }
@@ -60,7 +60,7 @@ public class FormularioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateFormulario(@PathVariable(value = "id")UUID id,@RequestBody @Valid FormularioDto formularioDto){
-        Optional<FormularioModel> formularioModelOptional = formularioService.finByID(id);
+        Optional<FormularioModel> formularioModelOptional = formularioService.finById(id);
         if (!formularioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Formulario not found.");
         }

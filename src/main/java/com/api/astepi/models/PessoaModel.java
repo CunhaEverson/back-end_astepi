@@ -13,6 +13,7 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
 @Entity
 @Table(name = "TB_PESSOA")
+
 public class PessoaModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -26,13 +27,19 @@ public class PessoaModel implements Serializable {
     @Column(unique = true, length = 14)
     private String cpf;
 
+    @Column(length = 14)
+    private String rg;
+
     @Column(length = 15)
     private String celular;
 
-    @Column(length = 50)
+    @Column(length = 15)
+    private String telFixo;
+
+    @Column(unique = true, length = 50)
     private String email;
 
-    @Column(length = 10)
+    @Column(length = 15)
     private String matricula;
 
     @Column(length = 50)
@@ -41,11 +48,11 @@ public class PessoaModel implements Serializable {
     @Column(length = 254)
     private String status;
 
-    @Column(length = 25)
-    private String nomeLogin;
+    @Column(unique = true, length = 30)
+    private String username;
 
-    @Column(length = 15)
-    private String senha;
+    @Column(length = 30)
+    private String password;
 
     @Column
     private LocalDateTime registrationDate;
@@ -75,16 +82,12 @@ public class PessoaModel implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getCelular() {
-        return celular;
+    public String getRg() {
+        return rg;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     public String getEmail() {
@@ -95,16 +98,28 @@ public class PessoaModel implements Serializable {
         this.email = email;
     }
 
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getTelFixo() {
+        return telFixo;
+    }
+
+    public void setTelFixo(String telFixo) {
+        this.telFixo = telFixo;
+    }
+
     public String getMatricula() {
         return matricula;
     }
 
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getStatus() {
@@ -115,20 +130,28 @@ public class PessoaModel implements Serializable {
         this.status = status;
     }
 
-    public String getNomeLogin() {
-        return nomeLogin;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNomeLogin(String nomeLogin) {
-        this.nomeLogin = nomeLogin;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
     public LocalDateTime getRegistrationDate() {

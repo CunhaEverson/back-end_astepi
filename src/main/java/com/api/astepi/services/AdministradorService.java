@@ -24,7 +24,7 @@ public class AdministradorService {
     public AdministradorModel save(AdministradorModel administradorModel) { return administradorRepository.save(administradorModel); }
     public Page<AdministradorModel> findAll(Pageable pageable){ return administradorRepository.findAll(pageable); }
 
-    public Optional<AdministradorModel> finByID(UUID id) {
+    public Optional<AdministradorModel> finById(UUID id) {
         return administradorRepository.findById(id);
     }
     @Transactional

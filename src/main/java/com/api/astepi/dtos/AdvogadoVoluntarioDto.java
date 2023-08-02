@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class AdvogadoVoluntarioDto extends PessoaDto {
+public class AdvogadoVoluntarioDto {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String numOAB;

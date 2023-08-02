@@ -46,7 +46,7 @@ public class PessoaController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOnePessoa(@PathVariable (value = "id")UUID id){
-        Optional<PessoaModel> pessoaModelOptional = pessoaService.finByID(id);
+        Optional<PessoaModel> pessoaModelOptional = pessoaService.finById(id);
         if(!pessoaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa not found.");
         }
@@ -54,7 +54,7 @@ public class PessoaController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletePessoa(@PathVariable (value = "id")UUID id){
-        Optional<PessoaModel> pessoaModelOptional = pessoaService.finByID(id);
+        Optional<PessoaModel> pessoaModelOptional = pessoaService.finById(id);
         if(!pessoaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa not found.");
         }
@@ -63,7 +63,7 @@ public class PessoaController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePessoa(@PathVariable(value = "id")UUID id,@RequestBody @Valid PessoaDto pessoaDto){
-        Optional<PessoaModel> pessoaModelOptional = pessoaService.finByID(id);
+        Optional<PessoaModel> pessoaModelOptional = pessoaService.finById(id);
         if (!pessoaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa not found.");
         }

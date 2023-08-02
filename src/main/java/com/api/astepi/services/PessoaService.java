@@ -30,7 +30,7 @@ public class PessoaService {
         return pessoaRepository.findAll(pageable);
     }
 
-    public Optional<PessoaModel> finByID(UUID id) {
+    public Optional<PessoaModel> finById(UUID id) {
         return pessoaRepository.findById(id);
     }
     @Transactional

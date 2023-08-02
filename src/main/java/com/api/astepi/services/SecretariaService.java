@@ -29,7 +29,7 @@ public class SecretariaService {
         return secretariaRepository.findAll(pageable);
     }
 
-    public Optional<SecretariaModel> finByID(UUID id) {
+    public Optional<SecretariaModel> findById(UUID id) {
         return secretariaRepository.findById(id);
     }
 

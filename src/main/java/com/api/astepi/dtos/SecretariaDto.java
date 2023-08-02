@@ -2,18 +2,28 @@ package com.api.astepi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 public class SecretariaDto {
 
+    @JsonIgnoreProperties(ignoreUnknown = true) //Atualizado
+    private UUID agendamentoId;
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private String procedimento;
+    private String departamento;
 
-    public String getProcedimento() {
-        return procedimento;
+    public String getDepartamento() {
+        return departamento;
     }
 
-    public void setProcedimento(String procedimento) {
-        this.procedimento = procedimento;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public UUID getAgendamentoId() {
+        return agendamentoId;
+    }
+
+    public void setAgendamentoId(UUID agendamentoId) {
+        this.agendamentoId = agendamentoId;
     }
 }

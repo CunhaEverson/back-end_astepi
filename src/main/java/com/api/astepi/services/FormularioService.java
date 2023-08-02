@@ -27,7 +27,7 @@ public class FormularioService {
         return formularioRepository.findAll(pageable);
     }
 
-    public Optional<FormularioModel> finByID(UUID id) {
+    public Optional<FormularioModel> finById(UUID id) {
         return formularioRepository.findById(id);
     }
 

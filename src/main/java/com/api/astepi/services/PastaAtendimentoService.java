@@ -30,7 +30,7 @@ public class PastaAtendimentoService {
         return pastaAtendimentoRepository.findAll(pageable);
     }
 
-    public Optional<PastaAtendimentoModel> finByID(UUID id) {
+    public Optional<PastaAtendimentoModel> finById(UUID id) {
         return pastaAtendimentoRepository.findById(id);
     }
 

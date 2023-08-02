@@ -1,65 +1,84 @@
 package com.api.astepi.models;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "TB_AGENDAMENTO")
 public class AgendamentoModel implements Serializable {
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(length = 2)
-    private int dia;
+    @Column(length = 10)
+    private String dia;
 
-    @Column(length = 2)
+    @Column(length = 10)
     private String mes;
 
-    @Column(length = 4)
-    private int ano;
+    @Column(length = 10)
+    private String ano;
 
-    @Column(length = 4)
-    private int horario;
+    @Column(length = 10)
+    private String horario;
 
-    @Column(length = 255)
-    private String sala;
+    @Column(columnDefinition="text", length=10485760)
+    private String observacao;
+
+    //@JsonIgnore
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private UsuarioModel usuario;
 
 
-    @ManyToMany(mappedBy = "agendamentos", cascade = { CascadeType.ALL })
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
+
+
+
+/*@ManyToMany(mappedBy = "agendamentos", cascade = { CascadeType.ALL })
     private Set<SecretariaModel> endereco= new HashSet<SecretariaModel>();
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "agendamento_endereco", joinColumns = {
-                    @JoinColumn(name = "agendamento_id")}, inverseJoinColumns = {
-                    @JoinColumn(name = "endereco_id")})
+            @JoinColumn(name = "agendamento_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "endereco_id")})
     Set<EnderecoModel> enderecos = new HashSet<EnderecoModel>();
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "agendamentoDocumento")
     private List<DocumentoModel> documento;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_agendamento_id")
+    private UsuarioModel usuarioAgendamento;*/
+
+    /*public UsuarioModel getUsuarioAgendamento() {
+        return usuarioAgendamento;
+    }
 
 
-    @JsonIgnore                                 //Atualizado
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private UsuarioModel usuario;
 
-
-
-
-/*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuarioModel_id")
-    private UsuarioModel usuarioModel;*/
-
+    public void setUsuarioAgendamento(UsuarioModel usuarioAgendamento) {
+        this.usuarioAgendamento = usuarioAgendamento;
+    }*/
 
     public UUID getId() {
         return id;
@@ -69,11 +88,11 @@ public class AgendamentoModel implements Serializable {
         this.id = id;
     }
 
-    public int getDia() {
+    public String getDia() {
         return dia;
     }
 
-    public void setDia(int dia) {
+    public void setDia(String dia) {
         this.dia = dia;
     }
 
@@ -85,32 +104,41 @@ public class AgendamentoModel implements Serializable {
         this.mes = mes;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
-    public int getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(int horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 
-    public String getSala() {
-        return sala;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setSala(String sala) {
-        this.sala = sala;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
+    /* public UsuarioModel getUsuarioModel() {
+        return usuarioModel;
+    }
+    public void setUsuarioModel(UsuarioModel usuarioModel) {
+        this.usuarioModel = usuarioModel;
+    }
+    public SecretariaModel getSecretariaModel() {
+        return secretariaModel;
+    }*/
 
-    public Set<SecretariaModel> getEndereco() {
+    /*public Set<SecretariaModel> getEndereco() {
         return endereco;
     }
 
@@ -132,14 +160,5 @@ public class AgendamentoModel implements Serializable {
 
     public void setDocumento(List<DocumentoModel> documento) {
         this.documento = documento;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
+    }*/
 }
-

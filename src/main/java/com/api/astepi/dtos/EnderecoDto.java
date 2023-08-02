@@ -1,14 +1,18 @@
 package com.api.astepi.dtos;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class EnderecoDto {
 
-    @JsonIgnoreProperties(ignoreUnknown = true) //Atualizado
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private UUID usuarioId;
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String rua;
 
@@ -20,6 +24,9 @@ public class EnderecoDto {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String complemento;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private String referencia;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private String bairro;
@@ -54,6 +61,14 @@ public class EnderecoDto {
         this.numero = numero;
     }
 
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
     public String getCep() {
         return cep;
     }
@@ -69,7 +84,6 @@ public class EnderecoDto {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-
 
     public String getBairro() {
         return bairro;
@@ -94,6 +108,5 @@ public class EnderecoDto {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
 
 }

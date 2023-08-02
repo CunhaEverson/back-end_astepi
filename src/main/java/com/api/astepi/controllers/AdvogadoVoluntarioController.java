@@ -44,7 +44,7 @@ public class AdvogadoVoluntarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneAdvogadoVoluntario(@PathVariable (value = "id") UUID id){
-        Optional<AdvogadoVoluntarioModel> advogadoVoluntarioModelOptional = advogadoVoluntarioService.finByID(id);
+        Optional<AdvogadoVoluntarioModel> advogadoVoluntarioModelOptional = advogadoVoluntarioService.finById(id);
         if(!advogadoVoluntarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("AdvogadoVoluntario not found.");
         }
@@ -53,7 +53,7 @@ public class AdvogadoVoluntarioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAdvogadoVoluntario(@PathVariable (value = "id")UUID id){
-        Optional<AdvogadoVoluntarioModel> advogadoVoluntarioModelOptional = advogadoVoluntarioService.finByID(id);
+        Optional<AdvogadoVoluntarioModel> advogadoVoluntarioModelOptional = advogadoVoluntarioService.finById(id);
         if(!advogadoVoluntarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("AdvogadoVoluntario not found.");
         }
@@ -63,7 +63,7 @@ public class AdvogadoVoluntarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateAdvogadoVoluntario(@PathVariable(value = "id")UUID id,@RequestBody @Valid AdvogadoVoluntarioDto advogadoVoluntarioDto){
-        Optional<AdvogadoVoluntarioModel> advogadoVoluntarioModelOptional = advogadoVoluntarioService.finByID(id);
+        Optional<AdvogadoVoluntarioModel> advogadoVoluntarioModelOptional = advogadoVoluntarioService.finById(id);
         if (!advogadoVoluntarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("AdvogadoVoluntario not found.");
         }

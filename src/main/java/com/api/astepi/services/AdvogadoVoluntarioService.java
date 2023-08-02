@@ -29,7 +29,7 @@ public class AdvogadoVoluntarioService {
         return advogadoVoluntarioRepository.findAll(pageable);
     }
 
-    public Optional<AdvogadoVoluntarioModel> finByID(UUID id) {
+    public Optional<AdvogadoVoluntarioModel> finById(UUID id) {
         return advogadoVoluntarioRepository.findById(id);
     }
 

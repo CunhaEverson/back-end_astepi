@@ -47,7 +47,7 @@ public class AdministradorController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneAdministrador(@PathVariable (value = "id") UUID id){
-        Optional<AdministradorModel> administradorModelOptional = administradorService.finByID(id);
+        Optional<AdministradorModel> administradorModelOptional = administradorService.finById(id);
         if(!administradorModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("administrador not found.");
         }
@@ -55,7 +55,7 @@ public class AdministradorController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAdministrador(@PathVariable (value = "id")UUID id){
-        Optional<AdministradorModel> administradorModelOptional = administradorService.finByID(id);
+        Optional<AdministradorModel> administradorModelOptional = administradorService.finById(id);
         if(!administradorModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("administrador not found.");
         }
@@ -64,7 +64,7 @@ public class AdministradorController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateAdministrador(@PathVariable(value = "id")UUID id,@RequestBody @Valid AdministradorDto administradorDto){
-        Optional<AdministradorModel> administradorModelOptional = administradorService.finByID(id);
+        Optional<AdministradorModel> administradorModelOptional = administradorService.finById(id);
         if (!administradorModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Administrador not found.");
         }

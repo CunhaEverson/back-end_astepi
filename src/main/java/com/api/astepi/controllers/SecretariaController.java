@@ -44,7 +44,7 @@ public class SecretariaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneSecretaria(@PathVariable (value = "id") UUID id){
-        Optional<SecretariaModel> secretariaModelOptional = secretariaService.finByID(id);
+        Optional<SecretariaModel> secretariaModelOptional = secretariaService.findById(id);
         if(!secretariaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Secretaria not found.");
         }
@@ -53,7 +53,7 @@ public class SecretariaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSecretaria(@PathVariable (value = "id")UUID id){
-        Optional<SecretariaModel> secretariaModelOptional = secretariaService.finByID(id);
+        Optional<SecretariaModel> secretariaModelOptional = secretariaService.findById(id);
         if(!secretariaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Secretaria not found.");
         }
@@ -63,7 +63,7 @@ public class SecretariaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateSecretaria(@PathVariable(value = "id")UUID id,@RequestBody @Valid SecretariaDto secretariaDto){
-        Optional<SecretariaModel> secretariaModelOptional = secretariaService.finByID(id);
+        Optional<SecretariaModel> secretariaModelOptional = secretariaService.findById(id);
         if (!secretariaModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Secretaria not found.");
         }

@@ -29,5 +29,4 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, UUID> {
      */
     List<UsuarioModel> findByNomeOrderByNome(@Param("name") String name);
 
-    boolean existsByEmail(String email);
 }

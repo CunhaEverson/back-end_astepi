@@ -1,10 +1,15 @@
 package com.api.astepi.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.JoinColumn;
@@ -25,8 +30,14 @@ public class EnderecoModel implements Serializable {
     @Column(length = 15)
     private String numero;
 
+    @Column(length = 15)
+    private String cep;
+
     @Column(length = 254)
     private String complemento;
+
+    @Column(length = 254)
+    private String referencia;
 
     @Column(length = 254)
     private String bairro;
@@ -37,38 +48,30 @@ public class EnderecoModel implements Serializable {
     @Column(length = 100)
     private String estado;
 
-    @Column(length = 15)
-    private String cep;
-
-    public EnderecoModel(){  //Atualizado
-
-    }
-
-    //Atualizado
-    public EnderecoModel(String rua, String numero, String cep, String complemento, String bairro, String cidade, String estado) {
-        this.rua = rua;
-        this.numero = numero;
-        this.cep = cep;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
-
-    /*@ManyToOne
-    @JoinColumn(name = "usuario_endereco_id")
-    private UsuarioModel usuarioEndereco;*/
-
-    @JsonIgnore                                 //Atualizado
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel usuario;
+
+    /*@ManyToOne
+    @JoinColumn(name = "usuario_endereco_id")
+    private UsuarioModel usuarioEndereco;
 
     @ManyToMany(mappedBy = "enderecos", cascade = { CascadeType.ALL })
     private Set<AgendamentoModel> agendamentos= new HashSet<AgendamentoModel>();
 
     @ManyToMany(mappedBy = "enderecos", cascade = { CascadeType.ALL })
-    private Set<AdvogadoVoluntarioModel> advogadosvoluntarios = new HashSet<AdvogadoVoluntarioModel>();
+    private Set<AdvogadoVoluntarioModel> advogadosvoluntarios = new HashSet<AdvogadoVoluntarioModel>();*/
+
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
 
     public UUID getId() {
         return id;
@@ -85,7 +88,6 @@ public class EnderecoModel implements Serializable {
     public void setRua(String rua) {
         this.rua = rua;
     }
-
 
     public String getCep() {
         return cep;
@@ -109,6 +111,14 @@ public class EnderecoModel implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
     public String getBairro() {
@@ -135,12 +145,12 @@ public class EnderecoModel implements Serializable {
         this.estado = estado;
     }
 
-    public UsuarioModel getUsuario() {
-        return usuario;
+    /*public UsuarioModel getUsuarioEndereco() {
+        return usuarioEndereco;
     }
 
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
+    public void setUsuarioEndereco(UsuarioModel usuarioEndereco) {
+        this.usuarioEndereco = usuarioEndereco;
     }
 
     public Set<AgendamentoModel> getAgendamentos() {
@@ -157,15 +167,15 @@ public class EnderecoModel implements Serializable {
 
     public void setAdvogadosvoluntarios(Set<AdvogadoVoluntarioModel> advogadosvoluntarios) {
         this.advogadosvoluntarios = advogadosvoluntarios;
-    }
+    }*/
 
-   /* public boolean comprovanteResid() {
+    public boolean comprovanteResid() {
         String entregue = "N";
         if (entregue == "S") {
             return true;
         } else {
             return false;
         }
-    }*/
+    }
 
 }

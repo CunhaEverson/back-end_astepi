@@ -47,7 +47,7 @@ public class SecretarioController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneSecretario(@PathVariable (value = "id") UUID id){
-        Optional<SecretarioModel> secretarioModelOptional = secretarioService.finByID(id);
+        Optional<SecretarioModel> secretarioModelOptional = secretarioService.finById(id);
         if(!secretarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Secretario not found.");
         }
@@ -55,7 +55,7 @@ public class SecretarioController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSecretario(@PathVariable (value = "id")UUID id){
-        Optional<SecretarioModel> secretarioModelOptional = secretarioService.finByID(id);
+        Optional<SecretarioModel> secretarioModelOptional = secretarioService.finById(id);
         if(!secretarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Secretario not found.");
         }
@@ -64,7 +64,7 @@ public class SecretarioController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateSecretario(@PathVariable(value = "id")UUID id,@RequestBody @Valid SecretarioDto secretarioDto){
-        Optional<SecretarioModel> secretarioModelOptional = secretarioService.finByID(id);
+        Optional<SecretarioModel> secretarioModelOptional = secretarioService.finById(id);
         if (!secretarioModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("secretario not found.");
         }
